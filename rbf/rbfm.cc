@@ -1361,5 +1361,3 @@ RC RecordBasedFileManager::reorganizeFile(FileHandle &fileHandle, const vector<A
 	RC rc = -1;
 	return rc;
 }
-
-

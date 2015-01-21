@@ -1068,4 +1068,3 @@ void Aggregate::getAttributes(vector<Attribute> &attrs) const
 	attrs.clear();
 	attrs = this->attrs;
 }
-

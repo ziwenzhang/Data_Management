@@ -7,21 +7,21 @@
 void insertTableData(const string &tableName, const int &tableType, const int &numCol, RecordBasedFileManager *rbfm, FileHandle &fileHandle) {
 
 	vector<Attribute> tableDescriptor;
-    Attribute attr;
-    attr.name = "tableName";
-    attr.type = TypeVarChar;
-    attr.length = (AttrLength)30;
-    tableDescriptor.push_back(attr);
+	Attribute attr;
+	attr.name = "tableName";
+	attr.type = TypeVarChar;
+	attr.length = (AttrLength)30;
+	tableDescriptor.push_back(attr);
 
-    attr.name = "tableType";
-    attr.type = TypeInt;
-    attr.length = (AttrLength)4;
-    tableDescriptor.push_back(attr);
+	attr.name = "tableType";
+	attr.type = TypeInt;
+	attr.length = (AttrLength)4;
+	tableDescriptor.push_back(attr);
 
-    attr.name = "numCol";
-    attr.type = TypeInt;
-    attr.length = (AttrLength)4;
-    tableDescriptor.push_back(attr);
+	attr.name = "numCol";
+	attr.type = TypeInt;
+	attr.length = (AttrLength)4;
+	tableDescriptor.push_back(attr);
 
 
 	int nameLength = tableName.length();
@@ -49,33 +49,31 @@ void insertTableData(const string &tableName, const int &tableType, const int &n
 void insertColData(const string &tableName, const string &colName, const int &colType, const int &colPosition, const int &colSize, RecordBasedFileManager *rbfm, FileHandle &fileHandle) {
 
 	vector<Attribute> colDescriptor;
-    Attribute attr;
-    attr.name = "tableName";
-    attr.type = TypeVarChar;
-    attr.length = (AttrLength)30;
-    colDescriptor.push_back(attr);
+	Attribute attr;
+	attr.name = "tableName";
+	attr.type = TypeVarChar;
+	attr.length = (AttrLength)30;
+	colDescriptor.push_back(attr);
 
-    attr.name = "colName";
-    attr.type = TypeVarChar;
-    attr.length = (AttrLength)30;
-    colDescriptor.push_back(attr);
+	attr.name = "colName";
+	attr.type = TypeVarChar;
+	attr.length = (AttrLength)30;
+	colDescriptor.push_back(attr);
 
-    attr.name = "colType";
-    attr.type = TypeInt;
-    attr.length = (AttrLength)4;
-    colDescriptor.push_back(attr);
+	attr.name = "colType";
+	attr.type = TypeInt;
+	attr.length = (AttrLength)4;
+	colDescriptor.push_back(attr);
 
-    attr.name = "colPosition";
-    attr.type = TypeInt;
-    attr.length = (AttrLength)4;
-    colDescriptor.push_back(attr);
+	attr.name = "colPosition";
+	attr.type = TypeInt;
+	attr.length = (AttrLength)4;
+	colDescriptor.push_back(attr);
 
-    attr.name = "colSize";
-    attr.type = TypeInt;
-    attr.length = (AttrLength)4;
-    colDescriptor.push_back(attr);
-
-
+	attr.name = "colSize";
+	attr.type = TypeInt;
+	attr.length = (AttrLength)4;
+	colDescriptor.push_back(attr);
 
 	int tableLength = tableName.length();
 	int colLength = colName.length();
@@ -107,7 +105,6 @@ void insertColData(const string &tableName, const string &colName, const int &co
 	rbfm->insertRecord(fileHandle, colDescriptor, data, rid);
 
 	free(data);
-
 }
 
 vector<Attribute> getAttrsOfRelToIndex() {
@@ -170,10 +167,10 @@ RelationManager* RelationManager::_rm = 0;
 
 RelationManager* RelationManager::instance()
 {
-    if(!_rm)
-        _rm = new RelationManager();
+	if(!_rm)
+		rm = new RelationManager();
 
-    return _rm;
+	return _rm;
 }
 
 RelationManager::RelationManager()
@@ -571,20 +568,6 @@ RC RelationManager::deleteTuples(const string &tableName)
 
 	delete dataProj;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	FileHandle fileHandle;
 	if (rbfm->openFile(tableName, fileHandle) != 0)
 		return rc;
@@ -626,13 +609,10 @@ RC RelationManager::deleteTuple(const string &tableName, const RID &rid)
 	rbfm->scan(fh1, indexDescriptor, "relName", EQ_OP, tableName.c_str(), attrProj, rbfm_ScanIterator);
 	rbfm->closeFile(fh1);
 
-
-
 	RID dumbRID;
 	char *dataProj = new char[PAGE_SIZE];
 	string indexName;
 	string attrName;
-
 
 	while (rbfm_ScanIterator.getNextRecord(dumbRID, dataProj) != RBFM_EOF) {
 		int offset = 0;
@@ -690,10 +670,7 @@ RC RelationManager::deleteTuple(const string &tableName, const RID &rid)
 		free((char *)keyTemp);
 	}
 
-
 	delete dataProj;
-
-
 
 	FileHandle fileHandle;
 	if (rbfm->openFile(tableName, fileHandle) != 0)
